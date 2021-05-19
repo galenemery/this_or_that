@@ -1,6 +1,6 @@
 #!/bin/bash
 #before running, replace redis_host here with the correct IP address for server_03
-redis_host="10.0.0.50"
+echo REDIS="10.0.0.50" | sudo tee -a /etc/environment
 
 #Initialization and installs
 yum update -y
@@ -32,9 +32,8 @@ export NVM_DIR="$HOME/.nvm"
 # Install node (change to a specific version if library issues arise with postgres)
 nvm install 10
 # Install tini 
-wget https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
-chmod +x tini
+npm install forever
 # Install dependencies
 npm install
 # Start server (port 8082)
-./tini -s -- node server.js 8082
+forever start server.js 8082
