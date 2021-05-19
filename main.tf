@@ -22,7 +22,8 @@ resource "aws_instance" "server_01" {
   subnet_id = "subnet-06f0e06203942b65a"
   vpc_security_group_ids = ["sg-06640da4306cdd7f7","sg-0a00862363996c204"]
   depends_on = [
-    aws_instance.server_03
+    aws_instance.server_03,
+    aws_instance.server_04
   ]
 
 #   provisioner "remote-exec" {
@@ -87,6 +88,41 @@ resource "aws_instance" "server_03" {
 
   tags = {
     Name    = "server_03",
+    Owner   = "galen.emery@lacework.net",
+    Purpose = "Customer PoC Testing"
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("C:/users/galen/gdrive/keys/galen-lacework.pem")
+    host        = self.public_ip
+  }
+}
+
+resource "aws_instance" "server_04" {
+  ami           = "ami-0cf6f5c8a62fa5da6"
+  associate_public_ip_address = true
+  instance_type = "t2.micro"
+  key_name = "galen-lacework"
+  subnet_id = "subnet-06f0e06203942b65a"
+  vpc_security_group_ids = ["sg-06640da4306cdd7f7","sg-0a00862363996c204"]
+  private_ip = "10.0.0.60"
+
+  provisioner "file" {
+      source = "files/scripts"
+      destination = "/tmp"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/scripts/setup_04.sh",
+      "sudo /tmp/scripts/setup_04.sh",
+    ]  
+  }
+
+  tags = {
+    Name    = "server_04",
     Owner   = "galen.emery@lacework.net",
     Purpose = "Customer PoC Testing"
   }
