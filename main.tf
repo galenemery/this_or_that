@@ -25,18 +25,18 @@ resource "aws_instance" "server_01" {
     aws_instance.server_03
   ]
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum update -y",
-      "sudo mkdir /app",
-      "sudo chmod 777 /app"
-    ]  
-  }
+#   provisioner "remote-exec" {
+#     inline = [
+#       "sudo yum update -y",
+#       "sudo mkdir /app",
+#       "sudo chmod 777 /app"
+#     ]  
+#   }
 
-  provisioner "file" {
-    source      = "vote/vote"
-    destination = "/app/vote"
-  }
+#   provisioner "file" {
+#     source      = "vote/vote"
+#     destination = "/app/vote"
+#   }
 
   provisioner "file" {
       source = "files/scripts"
@@ -45,8 +45,8 @@ resource "aws_instance" "server_01" {
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/scripts/setup_python.sh",
-      "/tmp/scripts/setup_python.sh",
+      "chmod +x /tmp/scripts/setup_01.sh",
+      "sudo /tmp/scripts/setup_01.sh",
     ]  
   }
 
