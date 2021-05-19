@@ -16,7 +16,7 @@ mv this_or_that/result /app/result
 #run the vote app
 cd /app/vote
 pip3 install -r /app/vote/requirements.txt
-gunicorn app:app -D -b 0.0.0.0:8080 --log-file - --access-logfile - --workers 4 --keep-alive 0
+/usr/local/bin/gunicorn app:app -D -b 0.0.0.0:8080 --log-file - --access-logfile - --workers 4 --keep-alive 0
 echo "gunicorn running"
 ps aux | grep python
 

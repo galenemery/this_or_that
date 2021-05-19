@@ -8,7 +8,7 @@ import logging
 
 option_a = os.getenv('OPTION_A', "Deluxes")
 option_b = os.getenv('OPTION_B', "Elites")
-redis_host = os.get('redis_host')
+redis_host = os.getenv('redis_host')
 hostname = socket.gethostname()
 
 app = Flask(__name__)
