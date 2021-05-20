@@ -18,13 +18,3 @@ echo "host  all     all     0.0.0.0/0   trust" | tee -a /var/lib/pgsql/data/pg_h
 echo "starting postgres"
 systemctl enable postgresql
 systemctl start postgresql
-
-#install docker to run the .net worker
-amazon-linux-extras install docker -y
-systemctl enable docker
-systemctl start docker
-
-#.net worker config
-cd /home/ec2-user/this_or_that/worker
-docker build -t worker .
-docker run worker -d
