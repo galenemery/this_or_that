@@ -16,7 +16,7 @@ mv this_or_that/result /app/result
 #run the vote app
 cd /app/vote
 pip3 install -r /app/vote/requirements.txt
-/usr/local/bin/gunicorn app:app -D -b 0.0.0.0:8080 --log-file - --access-logfile - --workers 4 --keep-alive 0
+/usr/local/bin/ 
 echo "gunicorn running"
 ps aux | grep python
 
@@ -32,8 +32,9 @@ export NVM_DIR="$HOME/.nvm"
 # Install node (change to a specific version if library issues arise with postgres)
 nvm install 10
 # Install tini 
-npm install forever
+wget https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
+chmod +x tini
 # Install dependencies
 npm install
 # Start server (port 8082)
-forever start server.js 8082
+./tini -s -- node server.js 8082

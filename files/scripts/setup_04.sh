@@ -1,6 +1,12 @@
 #!/bin/bash
+#Env variables
+echo REDIS="10.0.0.50" | sudo tee -a /etc/environment
+
+#Initial config
 yum update -y
 amazon-linux-extras install postgresql10 vim epel -y
+yum install git -y
+git clone https://github.com/galenemery/this_or_that.git
 
 #install & setup postgres 10
 yum install -y postgresql-server postgresql-devel
@@ -13,7 +19,12 @@ echo "starting postgres"
 systemctl enable postgresql
 systemctl start postgresql
 
-#config postgres for external connections
+#install docker to run the .net worker
+amazon-linux-extras install docker -y
+systemctl enable docker
+systemctl start docker
 
-
-#install .net for the worker
+#.net worker config
+cd /home/ec2-user/this_or_that/worker
+docker build -t worker .
+docker run worker -d
