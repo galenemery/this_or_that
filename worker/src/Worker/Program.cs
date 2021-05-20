@@ -107,9 +107,10 @@ namespace Worker
                     Console.Error.WriteLine("Connecting to redis");
                     return ConnectionMultiplexer.Connect(ipAddress);
                 }
-                catch (RedisConnectionException)
+                catch (RedisConnectionException rce)
                 {
                     Console.Error.WriteLine("Waiting for redis");
+                    Console.Error.WriteLine(rce.Message);
                     Thread.Sleep(1000);
                 }
             }

@@ -18,4 +18,4 @@ systemctl start docker
 #.net worker config
 cd /home/ec2-user/this_or_that/worker
 docker build -t worker .
-docker run worker -d
+docker run worker -d --net=host

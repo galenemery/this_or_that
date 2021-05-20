@@ -21,23 +21,10 @@ resource "aws_instance" "server_01" {
   key_name = "galen-lacework"
   subnet_id = "subnet-06f0e06203942b65a"
   vpc_security_group_ids = ["sg-06640da4306cdd7f7","sg-0a00862363996c204"]
-  depends_on = [
-    aws_instance.server_03,
-    aws_instance.server_04
-  ]
-
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo yum update -y",
-#       "sudo mkdir /app",
-#       "sudo chmod 777 /app"
-#     ]  
-#   }
-
-#   provisioner "file" {
-#     source      = "vote/vote"
-#     destination = "/app/vote"
-#   }
+  # depends_on = [
+  #   aws_instance.server_03,
+  #   aws_instance.server_04
+  # ]
 
   provisioner "file" {
       source = "files/scripts"
