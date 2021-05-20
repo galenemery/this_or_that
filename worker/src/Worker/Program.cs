@@ -7,7 +7,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using Npgsql;
 using StackExchange.Redis;
-​namespace Worker
+namespace Worker
 {
     public class Program
     {
