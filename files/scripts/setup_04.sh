@@ -5,8 +5,8 @@ echo REDIS="10.0.0.50" | sudo tee -a /etc/environment
 #Initial config
 yum update -y
 amazon-linux-extras install postgresql10 vim epel -y
-yum install git -y
-git clone https://github.com/galenemery/this_or_that.git
+# yum install git -y
+# git clone https://github.com/galenemery/this_or_that.git
 
 #install & setup postgres 10
 yum install -y postgresql-server postgresql-devel

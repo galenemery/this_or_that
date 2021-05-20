@@ -3,8 +3,8 @@
 #initialization
 yum update -y
 amazon-linux-extras install redis4.0 docker -y
-yum install git -y
-git clone https://github.com/galenemery/this_or_that.git
+# yum install git -y
+# git clone https://github.com/galenemery/this_or_that.git
 
 # run redis as a daemon without protected-mode.  Do not expose this redis server to the internets.
 redis-server --daemonize yes --protected-mode no
